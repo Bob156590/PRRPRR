@@ -10,42 +10,55 @@ namespace tba
             string winner = "";
             int player = 0;
             int comp = 0;
-            int qween = 10;
-            int king = 10;
-            int knight = 10;
-            int[] cards = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, king, qween, knight };
+            bool choose = true;
             bool con = true;
             while (con)
             {
+                choose = true;
                 Console.WriteLine("Välj ett alternativ\n1. Spela 21:an\n2. Visa senaste vinnaren\n3. Spelets regler\n4. Avsluta programmet");
                 switch (int.Parse(Console.ReadLine()))
                 {
                     case 1:
-                        player = rand.Next(cards.Length) + rand.Next(cards.Length);
-                        comp = rand.Next(cards.Length) + rand.Next(cards.Length);
+                        player = rand.Next(1, 10) + rand.Next(1, 10);
+                        comp = rand.Next(1, 10) + rand.Next(1, 10);
                         Console.WriteLine($"Nu kommer två kort dras per spelare\nDin poäng: {player} \nDatorns poäng: {comp}\nVill du ha ett till kort? (j/n)");
-                        string cho = Console.ReadLine().ToLower();
 
-                        while (cho == "j" && player < 22)
+                        while (choose && player < 22)
                         {
-                            int card = rand.Next(cards.Length);
-                            player += card;
-                            Console.WriteLine($"Ditt nya kort är värt {card}\nDin totalpoäng är {player}\nDin poäng: 12\nDatorns poäng: {comp}\nVill du ha ett till kort? (j/n)");
-                            cho = Console.ReadLine().ToLower();
+                            string cho = Console.ReadLine().ToLower();
+                            if (cho == "j")
+                            {
+                                int card = rand.Next(1, 10);
+                                player += card;
+                                Console.Clear();
+                                Console.WriteLine($"Ditt nya kort är värt {card}\nDin totalpoäng är {player}\nDatorns poäng: {comp}\nVill du ha ett till kort? (j/n)");
+                            }
+                            else if (cho == "n")
+                            {
+                                choose = false;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Du kan bara skriva j/n");
+                            }
+
                         }
                         while (comp < player && comp < 22 && player < 22)
                         {
-                            int card = rand.Next(cards.Length);
+                            int card = rand.Next(1, 10);
                             comp += card;
-                            Console.WriteLine($"Ditt nya kort är värt {card}\nDin totalpoäng är {player}\nDin poäng: 12\nDatorns poäng: {comp}");
                         }
                         if (player > comp && player < 22 || comp > 21)
                         {
+                            Console.Clear();
+                            Console.WriteLine($"Din totalpoäng är {player}\nDatorns poäng: {comp}\n");
                             Console.WriteLine("\nDu har vunnit!\nSkriv in ditt namn");
                             winner = Console.ReadLine();
                         }
                         else
                         {
+                            Console.Clear();
+                            Console.WriteLine($"Din totalpoäng är {player}\nDatorns poäng: {comp}\n");
                             Console.WriteLine("Du har förlorat");
                         }
                         break;
