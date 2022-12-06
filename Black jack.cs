@@ -11,7 +11,9 @@ namespace tba
             Random rand = new Random();
             string winner = "";
             int player = 0;
+            int ace = 11;
             int comp = 0;
+            bool cae = true;
             bool choose = true;
             bool con = true;
             bool mmm = true;
@@ -24,6 +26,7 @@ namespace tba
                     switch (int.Parse(Console.ReadLine()))
                     {
                         case 1:
+                            Console.Clear();
                             player = rand.Next(1, 10) + rand.Next(1, 10);
                             comp = rand.Next(1, 10) + rand.Next(1, 10);
                             Console.WriteLine($"Nu kommer två kort dras per spelare\nDin poäng: {player} \nDatorns poäng: {comp}\nVill du ha ett till kort? (j/n)");
@@ -31,12 +34,20 @@ namespace tba
                             while (choose && player < 22)
                             {
                                 string cho = Console.ReadLine().ToLower();
+                                Console.Clear();
                                 if (cho == "j")
                                 {
                                     int card = rand.Next(1, 10);
                                     player += card;
-                                    Console.Clear();
-                                    Console.WriteLine($"Ditt nya kort är värt {card}\nDin totalpoäng är {player}\nDatorns poäng: {comp}\nVill du ha ett till kort? (j/n)");
+                                    if (card == 1 && player + 11 < 22)
+                                    {
+
+                                        Console.WriteLine($"Ditt nya kort är värt {card}\nDin totalpoäng är {player}/{ace}\nDatorns poäng: {comp}\nVill du ha ett till kort? (j/n)");
+                                    }
+                                    if (cae)
+                                    {
+                                        Console.WriteLine($"Ditt nya kort är värt {card}\nDin totalpoäng är {player}\nDatorns poäng: {comp}\nVill du ha ett till kort? (j/n)");
+                                    }
                                 }
                                 else if (cho == "n")
                                 {
@@ -72,6 +83,7 @@ namespace tba
                                     {
                                         mmm = false;
                                     }
+                                    Console.Clear();
                                 }
                             }
                             else
@@ -85,20 +97,31 @@ namespace tba
                         case 2:
                             if (winner == "")
                             {
+                                Console.Clear();
                                 Console.WriteLine("ingen har vunnit än.\n");
+                                Console.ReadKey();
+                                Console.Clear();
                             }
                             else
                             {
+                                Console.Clear();
                                 Console.WriteLine($"Den sista vinnaren är: {winner}\n");
+                                Console.ReadKey();
+                                Console.Clear();
                             }
                             break;
                         case 3:
+                            Console.Clear();
                             Console.WriteLine("\nMålet i Blackjack är att få en bättre hand än dealern." +
                                 "\nFör att göra det, måste du ha en hand som är högre än dealerns, utan att handens totala värde överstiger 21." +
                                 "\nDu kan även vinna genom att ha ett totalt värde under 22 när det totala värdet på dealerns hand överstiger 21.\n");
+                            Console.ReadKey();
+                            Console.Clear();
                             break;
                         case 4:
+                            Console.Clear();
                             con = false;
+                            Console.WriteLine("Stänger ner");
                             break;
                         default:
                             Console.Clear();
@@ -117,6 +140,11 @@ namespace tba
                 }
             }
             Console.ReadKey();
+
+        }
+
+        static void Elva()
+        {
 
         }
     }
