@@ -5,21 +5,27 @@ namespace tba
 {
     class program
     {
+
+        static int Elva(int result, int card)
+        {
+            result += card;
+            return result;
+        }
         static void Main(string[] args)
         {
             Console.WriteLine("Välkommen till 21:an!");
             Random rand = new Random();
             string winner = "";
             int player = 0;
-            int ace = 11;
             int comp = 0;
             bool cae = true;
             bool choose = true;
             bool con = true;
-            bool mmm = true;
+            bool name = true;
+            int result = 11;
             while (con)
             {
-                choose = true;
+                result = 0;
                 try
                 {
                     Console.WriteLine("Välj ett alternativ\n1. Spela 21:an\n2. Visa senaste vinnaren\n3. Spelets regler\n4. Avsluta programmet");
@@ -28,8 +34,8 @@ namespace tba
                         case 1:
                             Console.Clear();
                             player = rand.Next(1, 10) + rand.Next(1, 10);
-                            comp = rand.Next(1, 10) + rand.Next(1, 10);
-                            Console.WriteLine($"Nu kommer två kort dras per spelare\nDin poäng: {player} \nDatorns poäng: {comp}\nVill du ha ett till kort? (j/n)");
+                            comp = rand.Next(1, 10);
+                            Console.WriteLine($"Nu kommer två kort dras per spelare\nDin poäng: {player}\nDatorns poäng: {comp}\nVill du ha ett till kort? (j/n)");
 
                             while (choose && player < 22)
                             {
@@ -39,12 +45,17 @@ namespace tba
                                 {
                                     int card = rand.Next(1, 10);
                                     player += card;
-                                    if (card == 1 && player + 11 < 22)
+                                    if (card == 1 && player + 11 < 22 || !cae)
                                     {
-
-                                        Console.WriteLine($"Ditt nya kort är värt {card}\nDin totalpoäng är {player}/{ace}\nDatorns poäng: {comp}\nVill du ha ett till kort? (j/n)");
+                                        result = Elva(result, card);
+                                        Console.WriteLine($"Ditt nya kort är värt {card}\nDin totalpoäng är {player} eller {result}\nDatorns poäng: {comp}\nVill du ha ett till kort? (j/n)");
+                                        cae = false;
+                                        if (result > 21)
+                                        {
+                                            cae = true;
+                                        }
                                     }
-                                    if (cae)
+                                     else if (cae)
                                     {
                                         Console.WriteLine($"Ditt nya kort är värt {card}\nDin totalpoäng är {player}\nDatorns poäng: {comp}\nVill du ha ett till kort? (j/n)");
                                     }
@@ -64,14 +75,14 @@ namespace tba
                                 int card = rand.Next(1, 10);
                                 comp += card;
                             }
-                            if (player > comp && player < 22 || comp > 21)
+                            if (player > comp && player < 22 || comp > 21 || comp < result)
                             {
                                 Console.Clear();
                                 Console.WriteLine($"Din totalpoäng är {player}\nDatorns poäng: {comp}\n");
                                 Console.WriteLine("\nDu har vunnit!\nSkriv in ditt namn");
-                                mmm = true;
+                                name = true;
 
-                                while (mmm)
+                                while (name)
                                 {
                                     winner = Console.ReadLine();
                                     if (winner == "")
@@ -81,7 +92,7 @@ namespace tba
                                     }
                                     else
                                     {
-                                        mmm = false;
+                                        name = false;
                                     }
                                     Console.Clear();
                                 }
@@ -140,11 +151,6 @@ namespace tba
                 }
             }
             Console.ReadKey();
-
-        }
-
-        static void Elva()
-        {
 
         }
     }
