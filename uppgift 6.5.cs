@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Uppgift_6._2
+namespace Uppgift_6._5
 {
     class program
     {
