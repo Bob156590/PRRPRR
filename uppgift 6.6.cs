@@ -1,26 +1,26 @@
 using System;
 
-namespace Uppgift_6._2
+namespace Uppgift_6._6
 {
     class program
     {
         static void Main(string[] args)
         {
             Console.WriteLine("Pls write two texts and this program will show which one is bigger");
-            Längst();
+            Längst(Console.ReadLine());
         }
-        static void Längst()
+        static void Längst(string text1)
         {
-            string taxt1 = Console.ReadLine();
             bool check = true;
             for (int i = 0; i < text1.Length; i++)
             {
-                if (check)
+                if (check == true)
                 {
                     if (text1[i] == ' ')
                     {
                         check = false;
                         Console.Write(" ");
+                        continue;
                     }
                     else
                     {
@@ -33,6 +33,7 @@ namespace Uppgift_6._2
                     {
                         check = true;
                         Console.Write(" ");
+                        continue;
                     }
                     else
                     {
