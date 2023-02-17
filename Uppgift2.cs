@@ -19,7 +19,10 @@ namespace upggift_2
                     Console.WriteLine($"meta in Fahrenheit för att få Celsius");
                     Console.WriteLine($"{FtillC(int.Parse(Console.ReadLine()))} C");
                     break;
-            }
+                 default:
+                    Console.WriteLine("du kan bara välja 1-2");
+                    break;  
+          }
         }
         static double CtillF(double tal)
         {
